@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Car Dealership Simulator</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="app">
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+    <header class="topbar">
+
+      <div class="brand">
+        <div class="brand-icon">🚘</div>
+
+        <div>
+          <h1>Car Dealership</h1>
+          <span>Dealership Simulator</span>
+        </div>
+      </div>
+
+      <div class="top-stats">
+
+        <div class="top-stat">
+          <span>💰 Capital</span>
+          <strong id="moneyDisplay">Rs 20,000,000,000</strong>
+        </div>
+
+        <div class="top-stat">
+          <span>🚗 Cars</span>
+          <strong id="inventoryCount">0</strong>
+        </div>
+
+        <div class="top-stat">
+          <span>🕒 Time</span>
+          <strong id="gameTime">09:00 AM</strong>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN LAYOUT
+    ========================== -->
+    <div class="main-layout">
+
+
+      <!-- =========================
+           SIDEBAR
+      ========================== -->
+      <aside class="sidebar">
+
+        <div class="sidebar-title">
+          DEALERSHIP
+        </div>
+
+        <button
+          class="nav-btn active"
+          data-screen="dashboardScreen"
+          id="dashboardBtn"
+        >
+          <span>📊</span>
+          Dashboard
+        </button>
+
+        <button
+          class="nav-btn"
+          data-screen="buyCarsScreen"
+          id="buyCarsBtn"
+        >
+          <span>🛒</span>
+          Buy Cars
+        </button>
+
+        <button
+          class="nav-btn"
+          data-screen="auctionScreen"
+          id="auctionBtn"
+        >
+          <span>🔨</span>
+          Auction
+        </button>
+
+        <button
+          class="nav-btn"
+          data-screen="inventoryScreen"
+          id="inventoryBtn"
+        >
+          <span>🚘</span>
+          Inventory
+        </button>
+
+        <button
+          class="nav-btn"
+          data-screen="forSaleScreen"
+          id="forSaleBtn"
+        >
+          <span>🏷️</span>
+          Cars For Sale
+        </button>
+
+        <button
+          class="nav-btn"
+          data-screen="customersScreen"
+          id="customersBtn"
+        >
+          <span>👥</span>
+          Customers
+        </button>
+
+        <button
+          class="nav-btn"
+          data-screen="salesScreen"
+          id="salesBtn"
+        >
+          <span>💵</span>
+          Sales
+        </button>
+
+        <button
+          class="nav-btn"
+          data-screen="paperworkScreen"
+          id="paperworkBtn"
+        >
+          <span>📄</span>
+          Paperwork
+        </button>
+
+        <div class="sidebar-spacer"></div>
+
+        <button
+          class="nav-btn"
+          data-screen="settingsScreen"
+          id="settingsBtn"
+        >
+          <span>⚙️</span>
+          Settings
+        </button>
+
+      </aside>
+
+
+      <!-- =========================
+           CONTENT
+      ========================== -->
+      <main class="content">
+
+
+        <!-- =========================
+             DASHBOARD
+        ========================== -->
+        <section
+          id="dashboardScreen"
+          class="screen active"
+        >
+
+          <div class="page-header">
+
+            <div>
+              <h2>Dealership Dashboard</h2>
+              <p>
+                Manage your dealership, buy cars and make deals.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="dashboard-cards">
+
+            <div class="dashboard-card money-card">
+              <span class="card-icon">💰</span>
+              <div>
+                <small>Available Capital</small>
+                <h3 id="dashboardMoney">
+                  Rs 20,000,000,000
+                </h3>
+              </div>
+            </div>
+
+            <div class="dashboard-card">
+              <span class="card-icon">🚘</span>
+              <div>
+                <small>Inventory</small>
+                <h3 id="dashboardInventory">0</h3>
+              </div>
+            </div>
+
+            <div class="dashboard-card">
+              <span class="card-icon">🏷️</span>
+              <div>
+                <small>Cars For Sale</small>
+                <h3 id="dashboardForSale">0</h3>
+              </div>
+            </div>
+
+            <div class="dashboard-card">
+              <span class="card-icon">💵</span>
+              <div>
+                <small>Total Sales</small>
+                <h3 id="dashboardSales">0</h3>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="dashboard-grid">
+
+            <div class="panel">
+
+              <div class="panel-header">
+                <h3>Quick Actions</h3>
+              </div>
+
+              <div class="quick-actions">
+
+                <button
+                  class="action-btn primary"
+                  id="quickBuyBtn"
+                >
+                  🛒 Buy Cars
+                </button>
+
+                <button
+                  class="action-btn"
+                  id="quickAuctionBtn"
+                >
+                  🔨 Start Auction
+                </button>
+
+                <button
+                  class="action-btn"
+                  id="quickInventoryBtn"
+                >
+                  🚘 View Inventory
+                </button>
+
+                <button
+                  class="action-btn"
+                  id="quickForSaleBtn"
+                >
+                  🏷️ Cars For Sale
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="panel">
+
+              <div class="panel-header">
+                <h3>Dealership Status</h3>
+              </div>
+
+              <div class="status-list">
+
+                <div class="status-row">
+                  <span>Customers</span>
+                  <strong id="dashboardCustomers">0</strong>
+                </div>
+
+                <div class="status-row">
+                  <span>Cars Sold</span>
+                  <strong id="dashboardCarsSold">0</strong>
+                </div>
+
+                <div class="status-row">
+                  <span>Total Profit</span>
+                  <strong id="dashboardProfit">
+                    Rs 0
+                  </strong>
+                </div>
+
+                <div class="status-row">
+                  <span>Next Customer</span>
+                  <strong id="customerCountdown">
+                    15s
+                  </strong>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="customer-alert" id="customerAlert">
+
+            <div class="alert-icon">👤</div>
+
+            <div>
+              <strong>Customer System</strong>
+              <p id="customerAlertText">
+                Customers will visit your dealership every 15 seconds.
+              </p>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             BUY CARS
+        ========================== -->
+        <section
+          id="buyCarsScreen"
+          class="screen"
+        >
+
+          <div class="page-header">
+
+            <div>
+              <h2>Buy Cars</h2>
+              <p>
+                Purchase vehicles for your dealership.
+              </p>
+            </div>
+
+            <div class="header-actions">
+
+              <input
+                type="search"
+                id="carSearch"
+                class="search-input"
+                placeholder="Search cars..."
+              >
+
+              <select id="carCategoryFilter">
+                <option value="all">All Categories</option>
+                <option value="sedan">Sedan</option>
+                <option value="suv">SUV</option>
+                <option value="hatchback">Hatchback</option>
+                <option value="pickup">Pickup</option>
+                <option value="mpv">MPV</option>
+                <option value="electric">Electric</option>
+                <option value="luxury">Luxury</option>
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="buy-info-bar">
+
+            <div>
+              <strong>50 Vehicles Available</strong>
+              <span>Simulator prices increase by vehicle.</span>
+            </div>
+
+            <div>
+              Your Capital:
+              <strong id="buyCarsMoney">
+                Rs 20,000,000,000
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div
+            id="buyCarsGrid"
+            class="car-grid"
+          >
+            <!-- Cars generated by JavaScript -->
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             AUCTION
+        ========================== -->
+        <section
+          id="auctionScreen"
+          class="screen"
+        >
+
+          <div class="page-header">
+
+            <div>
+              <h2>Car Auction</h2>
+              <p>
+                Bid against other dealership buyers.
+              </p>
+            </div>
+
+            <div class="auction-timer">
+              <span>TIME LEFT</span>
+              <strong id="auctionTimer">30</strong>
+            </div>
+
+          </div>
+
+
+          <div class="auction-layout">
+
+            <div
+              class="auction-car-card"
+              id="auctionCarCard"
+            >
+
+              <div class="auction-car-image">
+                🚘
+              </div>
+
+              <div class="auction-car-info">
+
+                <span class="car-label">
+                  CURRENT AUCTION
+                </span>
+
+                <h2 id="auctionCarName">
+                  No Auction Running
+                </h2>
+
+                <p id="auctionCarDetails">
+                  Start an auction to begin bidding.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="auction-panel">
+
+              <div class="bid-stat">
+                <span>Starting Bid</span>
+                <strong id="auctionStartingBid">
+                  Rs 0
+                </strong>
+              </div>
+
+              <div class="bid-stat highlight">
+                <span>Current Bid</span>
+                <strong id="auctionCurrentBid">
+                  Rs 0
+                </strong>
+              </div>
+
+              <div class="bid-stat">
+                <span>Your Highest Bid</span>
+                <strong id="yourHighestBid">
+                  Rs 0
+                </strong>
+              </div>
+
+              <div class="bid-controls">
+
+                <input
+                  type="number"
+                  id="bidAmount"
+                  placeholder="Enter bid amount"
+                  min="0"
+                >
+
+                <button
+                  class="action-btn primary"
+                  id="placeBidBtn"
+                >
+                  🔨 Place Bid
+                </button>
+
+                <button
+                  class="action-btn"
+                  id="startAuctionBtn"
+                >
+                  Start New Auction
+                </button>
+
+              </div>
+
+              <p
+                class="auction-message"
+                id="auctionMessage"
+              >
+                No auction is currently running.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             INVENTORY
+        ========================== -->
+        <section
+          id="inventoryScreen"
+          class="screen"
+        >
+
+          <div class="page-header">
+
+            <div>
+              <h2>Inventory</h2>
+              <p>
+                Cars currently owned by your dealership.
+              </p>
+            </div>
+
+            <button
+              class="action-btn primary"
+              id="inventoryBuyBtn"
+            >
+              + Buy Another Car
+            </button>
+
+          </div>
+
+
+          <div
+            id="inventoryGrid"
+            class="car-grid"
+          >
+            <!-- Inventory generated by JavaScript -->
+          </div>
+
+          <div
+            class="empty-state"
+            id="inventoryEmpty"
+          >
+            <div>🚘</div>
+            <h3>No Cars In Inventory</h3>
+            <p>Buy your first car from the Buy Cars section.</p>
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             CARS FOR SALE
+        ========================== -->
+        <section
+          id="forSaleScreen"
+          class="screen"
+        >
+
+          <div class="page-header">
+
+            <div>
+              <h2>Cars For Sale</h2>
+              <p>
+                Set prices and negotiate with incoming customers.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="dealership-notice">
+
+            <span>👥</span>
+
+            <div>
+              <strong>Automatic Customers</strong>
+
+              <p>
+                A new customer will arrive every
+                <strong>15 seconds</strong>.
+                They will make a random offer based on your asking price.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div
+            id="forSaleGrid"
+            class="car-grid"
+          >
+            <!-- Cars for sale generated by JavaScript -->
+          </div>
+
+          <div
+            class="empty-state"
+            id="forSaleEmpty"
+          >
+            <div>🏷️</div>
+            <h3>No Cars For Sale</h3>
+            <p>
+              Put one of your inventory cars up for sale.
+            </p>
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             CUSTOMERS
+        ========================== -->
+        <section
+          id="customersScreen"
+          class="screen"
+        >
+
+          <div class="page-header">
+
+            <div>
+              <h2>Customers</h2>
+              <p>
+                Deal with customers visiting your dealership.
+              </p>
+            </div>
+
+            <div class="customer-countdown-box">
+
+              <span>Next Customer</span>
+
+              <strong id="customersCountdown">
+                15s
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="customer-layout">
+
+            <div class="customer-profile">
+
+              <div class="customer-avatar" id="customerAvatar">
+                👤
+              </div>
+
+              <h2 id="customerName">
+                Waiting for customer...
+              </h2>
+
+              <p id="customerDescription">
+                A customer will arrive automatically.
+              </p>
+
+              <div class="customer-preferences">
+
+                <div>
+                  <span>Budget</span>
+                  <strong id="customerBudget">
+                    Rs 0
+                  </strong>
+                </div>
+
+                <div>
+                  <span>Interested In</span>
+                  <strong id="customerInterest">
+                    —
+                  </strong>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="deal-panel">
+
+              <h3>Current Deal</h3>
+
+              <div class="deal-car">
+                <span>Car</span>
+                <strong id="dealCarName">
+                  No active deal
+                </strong>
+              </div>
+
+              <div class="deal-price">
+                <span>Customer Offer</span>
+                <strong id="customerOffer">
+                  Rs 0
+                </strong>
+              </div>
+
+              <div class="deal-buttons">
+
+                <button
+                  class="action-btn primary"
+                  id="acceptDealBtn"
+                >
+                  ✓ Accept Deal
+                </button>
+
+                <button
+                  class="action-btn"
+                  id="bargainBtn"
+                >
+                  🤝 Bargain
+                </button>
+
+                <button
+                  class="action-btn danger"
+                  id="rejectDealBtn"
+                >
+                  ✕ Reject
+                </button>
+
+              </div>
+
+              <p
+                class="deal-message"
+                id="dealMessage"
+              >
+                No customer deal available.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             SALES
+        ========================== -->
+        <section
+          id="salesScreen"
+          class="screen"
+        >
+
+          <div class="page-header">
+
+            <div>
+              <h2>Sales History</h2>
+              <p>
+                Review every vehicle sold by your dealership.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="sales-summary">
+
+            <div>
+              <span>Total Cars Sold</span>
+              <strong id="salesTotalCars">0</strong>
+            </div>
+
+            <div>
+              <span>Total Revenue</span>
+              <strong id="salesRevenue">Rs 0</strong>
+            </div>
+
+            <div>
+              <span>Total Profit</span>
+              <strong id="salesProfit">Rs 0</strong>
+            </div>
+
+          </div>
+
+
+          <div class="table-container">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Car</th>
+                  <th>Buyer</th>
+                  <th>Sale Price</th>
+                  <th>Profit</th>
+                  <th>Date</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="salesTableBody">
+                <!-- Sales generated by JavaScript -->
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             PAPERWORK
+        ========================== -->
+        <section
+          id="paperworkScreen"
+          class="screen"
+        >
+
+          <div class="page-header">
+
+            <div>
+              <h2>Sales Paperwork</h2>
+              <p>
+                Complete buyer information and signature before a sale.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="paperwork-container">
+
+            <div class="paperwork-preview">
+
+              <div class="paper-logo">
+                🚘
+              </div>
+
+              <h2>CAR DEALERSHIP</h2>
+
+              <p>VEHICLE SALES AGREEMENT</p>
+
+              <hr>
+
+              <div class="paper-row">
+                <span>Vehicle</span>
+                <strong id="paperCarName">
+                  —
+                </strong>
+              </div>
+
+              <div class="paper-row">
+                <span>Sale Price</span>
+                <strong id="paperSalePrice">
+                  Rs 0
+                </strong>
+              </div>
+
+              <div class="paper-row">
+                <span>Buyer</span>
+                <strong id="paperBuyerName">
+                  —
+                </strong>
+              </div>
+
+              <hr>
+
+              <p class="paper-small">
+                By signing this document, the buyer confirms the
+                purchase of the vehicle shown above.
+              </p>
+
+            </div>
+
+
+            <div class="paperwork-form">
+
+              <label for="buyerName">
+                Buyer's Full Name
+              </label>
+
+              <input
+                type="text"
+                id="buyerName"
+                placeholder="Enter buyer name"
+              >
+
+
+              <label>
+                Buyer's Signature
+              </label>
+
+              <div class="signature-box">
+
+                <canvas
+                  id="signatureCanvas"
+                  width="500"
+                  height="220"
+                ></canvas>
+
+              </div>
+
+              <div class="signature-buttons">
+
+                <button
+                  class="action-btn"
+                  id="clearSignatureBtn"
+                >
+                  Clear Signature
+                </button>
+
+              </div>
+
+
+              <div class="paperwork-actions">
+
+                <button
+                  class="action-btn"
+                  id="cancelPaperworkBtn"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  class="action-btn primary"
+                  id="completeSaleBtn"
+                >
+                  Complete Sale
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             SETTINGS
+        ========================== -->
+        <section
+          id="settingsScreen"
+          class="screen"
+        >
+
+          <div class="page-header">
+
+            <div>
+              <h2>Settings</h2>
+              <p>
+                Customize your dealership simulator.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="settings-panel">
+
+            <div class="setting-row">
+
+              <div>
+                <strong>Auto Save</strong>
+                <p>Automatically save your dealership progress.</p>
+              </div>
+
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  id="autoSaveToggle"
+                  checked
+                >
+                <span></span>
+              </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+              <div>
+                <strong>Customer Notifications</strong>
+                <p>Show a notification when a customer arrives.</p>
+              </div>
+
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  id="customerNotificationsToggle"
+                  checked
+                >
+                <span></span>
+              </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+              <div>
+                <strong>Dark Mode</strong>
+                <p>Change the dealership interface appearance.</p>
+              </div>
+
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  id="darkModeToggle"
+                >
+                <span></span>
+              </label>
+
+            </div>
+
+
+            <div class="settings-danger">
+
+              <h3>Game Data</h3>
+
+              <p>
+                Resetting will delete your dealership progress.
+              </p>
+
+              <button
+                class="action-btn danger"
+                id="resetGameBtn"
+              >
+                Reset Dealership
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+
+
+    <!-- =========================
+         CAR DETAILS MODAL
+    ========================== -->
+    <div
+      id="carDetailsModal"
+      class="modal hidden"
+    >
+
+      <div class="modal-box">
+
+        <button
+          class="modal-close"
+          id="closeCarModalBtn"
+        >
+          ×
+        </button>
+
+        <div id="carModalContent">
+          <!-- Car details generated by JavaScript -->
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         BUY CAR MODAL
+    ========================== -->
+    <div
+      id="buyCarModal"
+      class="modal hidden"
+    >
+
+      <div class="modal-box">
+
+        <button
+          class="modal-close"
+          id="closeBuyModalBtn"
+        >
+          ×
+        </button>
+
+        <h2>Purchase Vehicle</h2>
+
+        <div id="buyCarDetails">
+          <!-- Purchase details generated by JavaScript -->
+        </div>
+
+        <div class="purchase-options">
+
+          <label for="carColorSelect">
+            Vehicle Color
+          </label>
+
+          <select id="carColorSelect">
+            <option>Black</option>
+            <option>White</option>
+            <option>Silver</option>
+            <option>Red</option>
+            <option>Blue</option>
+            <option>Grey</option>
+          </select>
+
+
+          <label for="carConditionSelect">
+            Condition
+          </label>
+
+          <select id="carConditionSelect">
+            <option value="excellent">Excellent</option>
+            <option value="good">Good</option>
+            <option value="fair">Fair</option>
+          </select>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            class="action-btn"
+            id="cancelBuyBtn"
+          >
+            Cancel
+          </button>
+
+          <button
+            class="action-btn primary"
+            id="confirmBuyBtn"
+          >
+            Buy Vehicle
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         SALE PRICE MODAL
+    ========================== -->
+    <div
+      id="salePriceModal"
+      class="modal hidden"
+    >
+
+      <div class="modal-box">
+
+        <button
+          class="modal-close"
+          id="closeSalePriceModalBtn"
+        >
+          ×
+        </button>
+
+        <h2>Put Car Up For Sale</h2>
+
+        <div id="saleCarDetails">
+          <!-- Sale car details -->
+        </div>
+
+        <label for="askingPriceInput">
+          Asking Price
+        </label>
+
+        <input
+          type="number"
+          id="askingPriceInput"
+          placeholder="Enter asking price"
+          min="0"
+        >
+
+        <div class="modal-actions">
+
+          <button
+            class="action-btn"
+            id="cancelSalePriceBtn"
+          >
+            Cancel
+          </button>
+
+          <button
+            class="action-btn primary"
+            id="confirmSalePriceBtn"
+          >
+            Put Up For Sale
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         NOTIFICATION
+    ========================== -->
+    <div
+      id="notification"
+      class="notification hidden"
+    >
+      <span id="notificationIcon">✓</span>
+
+      <div>
+        <strong id="notificationTitle">
+          Notification
+        </strong>
+
+        <p id="notificationMessage">
+          —
+        </p>
+      </div>
+
+      <button id="closeNotificationBtn">
+        ×
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- JavaScript -->
+  <script
+    src="script.js"
+    defer
+  ></script>
+
+</body>
+</html>
+```
